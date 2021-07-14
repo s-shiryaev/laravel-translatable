@@ -36,7 +36,7 @@ trait Translatable
         $fallbackLocale = config('app.fallback_locale');
         $attributes = parent::attributesToArray();
 
-        if (!$withTranslate) {
+        if (! $withTranslate) {
             return $attributes;
         }
 

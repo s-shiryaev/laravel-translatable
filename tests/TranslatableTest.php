@@ -7,7 +7,6 @@ use SShiryaev\LaravelTranslatable\TranslatableCollection;
 
 class TranslatableTest extends TestCase
 {
-
     protected TestModel $testModel;
 
     public function setUp(): void

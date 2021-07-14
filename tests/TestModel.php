@@ -8,7 +8,8 @@ use SShiryaev\LaravelTranslatable\Translatable;
 
 class TestModel extends Model
 {
-    use HasFactory, Translatable;
+    use HasFactory;
+    use Translatable;
 
     protected $table = 'test_models';
 
