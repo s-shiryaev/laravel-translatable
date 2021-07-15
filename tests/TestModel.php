@@ -2,13 +2,11 @@
 
 namespace SShiryaev\LaravelTranslatable\Tests;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use SShiryaev\LaravelTranslatable\Translatable;
 
 class TestModel extends Model
 {
-    use HasFactory;
     use Translatable;
 
     protected $table = 'test_models';
