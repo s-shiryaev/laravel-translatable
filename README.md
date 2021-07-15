@@ -31,7 +31,7 @@ use SShiryaev\LaravelTranslatable\Translatable;
 
 class Currency extends Model
 {
-    use HasFactory, Translatable;
+    use Translatable;
 
     protected $translatable = ['name', 'code'];
 
