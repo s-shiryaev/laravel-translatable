@@ -5,8 +5,6 @@ on:
     branches:
       - master
   pull_request:
-    branches:
-      - master
 
 jobs:
   test:
@@ -16,13 +14,19 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
         php: [8.0, 7.4]
-        laravel: [8.*, 7.*]
+        laravel: [9.*, 8.*, 7.*]
         stability: [prefer-lowest, prefer-stable]
         include:
+          - laravel: 9.*
+            testbench: ^7.0
           - laravel: 8.*
             testbench: ^6.6
           - laravel: 7.*
             testbench: ^5.9
+        exclude:
+          - laravel: 9.*
+            testbench: ^7.0
+            php: 7.4
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
