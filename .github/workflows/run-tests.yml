@@ -2,9 +2,9 @@ name: run-tests
 
 on:
   push:
-    branches: [master]
+    branches:
+      - master
   pull_request:
-    branches: [master]
 
 jobs:
   test:
@@ -23,6 +23,10 @@ jobs:
             testbench: ^6.6
           - laravel: 7.*
             testbench: ^5.9
+        exclude:
+          - laravel: 9.*
+            testbench: ^7.0
+            php: 7.4
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
