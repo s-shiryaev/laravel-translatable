@@ -18,11 +18,11 @@ trait Translatable
             $locale = App::getLocale();
             $fallbackLocale = config('app.fallback_locale');
 
-            if (!is_null($translatedValue = $this->getAttribute("{$key}_$locale"))) {
+            if (! is_null($translatedValue = $this->getAttribute("{$key}_$locale"))) {
                 return $translatedValue;
             }
 
-            if ($fallbackLocale && !is_null($defaultValue = $this->getAttribute("{$key}_$fallbackLocale"))) {
+            if ($fallbackLocale && ! is_null($defaultValue = $this->getAttribute("{$key}_$fallbackLocale"))) {
                 return $defaultValue;
             }
         }
@@ -42,20 +42,20 @@ trait Translatable
         $fallbackLocale = config('app.fallback_locale');
         $attributes = parent::attributesToArray();
 
-        if (!$withTranslate) {
+        if (! $withTranslate) {
             return $attributes;
         }
 
         if (property_exists($this, 'translatable') && is_array($this->translatable)) {
             foreach ($this->translatable as $field) {
-                if (!is_null($translatedValue = $this->getAttribute("{$field}_$locale"))) {
+                if (! is_null($translatedValue = $this->getAttribute("{$field}_$locale"))) {
                     $attributes[$field] = $translatedValue;
                     unset($attributes["{$field}_$locale"]);
 
                     continue;
                 }
 
-                if ($fallbackLocale && !is_null($defaultValue = $this->getAttribute("{$field}_$fallbackLocale"))) {
+                if ($fallbackLocale && ! is_null($defaultValue = $this->getAttribute("{$field}_$fallbackLocale"))) {
                     $attributes[$field] = $defaultValue;
                     unset($attributes["{$field}_$fallbackLocale"]);
 
