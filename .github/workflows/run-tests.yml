@@ -3,9 +3,10 @@ name: run-tests
 on:
   push:
     branches:
-      - master
+      - 1.x
   pull_request:
-
+    branches:
+      - 1.x
 jobs:
   test:
     runs-on: ${{ matrix.os }}
@@ -51,4 +52,4 @@ jobs:
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Execute tests
-        run: vendor/bin/phpunit
+        run: vendor/bin/phpunit --no-coverage
