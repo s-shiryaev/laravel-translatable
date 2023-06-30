@@ -1,8 +1,8 @@
 # Trait for implementing model localization
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/s-shiryaev/laravel-translatable.svg?style=flat-square)](https://packagist.org/packages/s-shiryaev/laravel-translatable)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/s-shiryaev/laravel-translatable/run-tests.yml?branch=master)](https://github.com/s-shiryaev/laravel-translatable/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/s-shiryaev/laravel-translatable/php-cs-fixer.yml?branch=master)](https://github.com/s-shiryaev/laravel-translatable/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
+[![Tests](https://github.com/s-shiryaev/laravel-translatable/actions/workflows/run-tests.yml/badge.svg?branch=master)](https://github.com/s-shiryaev/laravel-translatable/actions/workflows/run-tests.yml)
+[![Check & fix styling](https://github.com/s-shiryaev/laravel-translatable/actions/workflows/php-cs-fixer.yml/badge.svg)](https://github.com/s-shiryaev/laravel-translatable/actions/workflows/php-cs-fixer.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/s-shiryaev/laravel-translatable.svg?style=flat-square)](https://packagist.org/packages/s-shiryaev/laravel-translatable)
 
 
