@@ -24,7 +24,7 @@ class TranslatableTest extends TestCase
     public function singleModelTestToArray(
         array $fillData,
         string $locale,
-        string $fallbackLocale,
+        ?string $fallbackLocale,
         array $expectData
     ) {
         $this->app['config']->set('app.fallback_locale', $fallbackLocale);
@@ -53,7 +53,7 @@ class TranslatableTest extends TestCase
     public function collectionTestToArray(
         array $dataArray,
         string $locale,
-        string $fallbackLocale,
+        ?string $fallbackLocale,
         array $expectArray
     ) {
         $this->app['config']->set('app.fallback_locale', $fallbackLocale);
@@ -81,7 +81,7 @@ class TranslatableTest extends TestCase
     public function singleModelRelationTestToArray(
         array $dataArray,
         string $locale,
-        string $fallbackLocale,
+        ?string $fallbackLocale,
         array $expectArray
     ) {
         $this->app['config']->set('app.fallback_locale', $fallbackLocale);
@@ -126,9 +126,43 @@ class TranslatableTest extends TestCase
      * Data providers
      */
 
-    public function getSingleModelTestToArrayData(): array
+    public static function getSingleModelTestToArrayData(): array
     {
         return [
+            [
+                [
+                    'name_ru' => 'Тестовое имя',
+                    'code_ru' => 'Код',
+                    'code_en' => 'Code',
+                    'code_de' => 'Produktcode',
+                ],
+                'en',
+                null,
+                [
+                    'name_ru' => 'Тестовое имя',
+                    'code_ru' => 'Код',
+                    'code' => 'Code',
+                    'code_de' => 'Produktcode',
+                ],
+            ],
+            [
+                [
+                    'name_ru' => 'Тестовое имя',
+                    'name_en' => '0',
+                    'code_ru' => 'Код',
+                    'code_en' => 'Code',
+                    'code_de' => 'Produktcode',
+                ],
+                'en',
+                'ru',
+                [
+                    'name_ru' => 'Тестовое имя',
+                    'name' => '0',
+                    'code_ru' => 'Код',
+                    'code' => 'Code',
+                    'code_de' => 'Produktcode',
+                ],
+            ],
             [
                 [
                     'name_ru' => 'Тестовое имя',
@@ -224,7 +258,7 @@ class TranslatableTest extends TestCase
         ];
     }
 
-    public function getCollectionTestToArrayData(): array
+    public static function getCollectionTestToArrayData(): array
     {
         return [
             [
