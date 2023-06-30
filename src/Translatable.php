@@ -18,45 +18,51 @@ trait Translatable
             $locale = App::getLocale();
             $fallbackLocale = config('app.fallback_locale');
 
-            if ($translatedValue = parent::__get("{$key}_$locale")) {
+            if (!is_null($translatedValue = $this->getAttribute("{$key}_$locale"))) {
                 return $translatedValue;
             }
 
-            if ($defaultValue = parent::__get("{$key}_$fallbackLocale")) {
+            if ($fallbackLocale && !is_null($defaultValue = $this->getAttribute("{$key}_$fallbackLocale"))) {
                 return $defaultValue;
             }
         }
 
-        return parent::__get($key);
+        return $this->getAttribute($key);
     }
 
+    /**
+     * Convert the model's attributes to an array.
+     *
+     * @param bool $withTranslate FALSE to get original attributes without translation; defaults to TRUE
+     * @return array
+     */
     public function attributesToArray(bool $withTranslate = true): array
     {
         $locale = App::getLocale();
         $fallbackLocale = config('app.fallback_locale');
         $attributes = parent::attributesToArray();
 
-        if (! $withTranslate) {
+        if (!$withTranslate) {
             return $attributes;
         }
 
         if (property_exists($this, 'translatable') && is_array($this->translatable)) {
             foreach ($this->translatable as $field) {
-                if ($translatedValue = parent::__get("{$field}_$locale")) {
+                if (!is_null($translatedValue = $this->getAttribute("{$field}_$locale"))) {
                     $attributes[$field] = $translatedValue;
                     unset($attributes["{$field}_$locale"]);
 
                     continue;
                 }
 
-                if ($defaultValue = parent::__get("{$field}_$fallbackLocale")) {
+                if ($fallbackLocale && !is_null($defaultValue = $this->getAttribute("{$field}_$fallbackLocale"))) {
                     $attributes[$field] = $defaultValue;
                     unset($attributes["{$field}_$fallbackLocale"]);
 
                     continue;
                 }
 
-                if ($value = parent::__get($field)) {
+                if ($value = $this->getAttribute($field)) {
                     $attributes[$field] = $value;
                 }
             }
@@ -65,6 +71,12 @@ trait Translatable
         return $attributes;
     }
 
+    /**
+     * Get the model's relationships in array form.
+     *
+     * @param bool $withTranslate FALSE to get original values without translation; defaults to TRUE
+     * @return array
+     */
     public function relationsToArray(bool $withTranslate = true): array
     {
         $attributes = [];
@@ -90,6 +102,12 @@ trait Translatable
         return $attributes;
     }
 
+    /**
+     * Convert the model instance to an array.
+     *
+     * @param bool $withTranslate FALSE to get original values without translation; defaults to TRUE
+     * @return array
+     */
     public function toArray(bool $withTranslate = true): array
     {
         return array_merge($this->attributesToArray($withTranslate), $this->relationsToArray($withTranslate));
