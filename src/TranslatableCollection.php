@@ -9,8 +9,8 @@ class TranslatableCollection extends Collection
     public function toArray(bool $withTranslate = true): array
     {
         return $this->map(
-            static function ($value) use ($withTranslate) {
-                return $value->toArray($withTranslate);
+            static function ($value) use ($withTranslate): array {
+                return $value->toArray($withTranslate); // @phpstan-ignore-line
             }
         )->all();
     }
